@@ -6,18 +6,19 @@ export interface PeriodicElement {
   nome: string;
   position: number;
   email: string;
-  cargo: string;
+  departamento: string;
+  celular: Number;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, nome: 'Igor Rebeche Rosa', email: 'igorrebeche@gmail.com', cargo: 'Contas a pagar'},
-  {position: 2, nome: 'Igor Rebeche Rosa', email: 'igorrebeche@gmail.com', cargo: 'Contas a pagar'},
-  {position: 3, nome: 'Igor Rebeche Rosa', email: 'igorrebeche@gmail.com', cargo: 'Contas a pagar'},
-  {position: 4, nome: 'Igor Rebeche Rosa', email: 'igorrebeche@gmail.com', cargo: 'Contas a pagar'},
-  {position: 5, nome: 'Igor Rebeche Rosa', email: 'igorrebeche@gmail.com', cargo: 'Contas a pagar'},
-  {position: 6, nome: 'Igor Rebeche Rosa', email: 'igorrebeche@gmail.com', cargo: 'Contas a pagar'},
-  {position: 7, nome: 'Igor Rebeche Rosa', email: 'igorrebeche@gmail.com', cargo: 'Contas a pagar'},
-  {position: 8, nome: 'Igor Rebeche Rosa', email: 'igorrebeche@gmail.com', cargo: 'Contas a pagar'},
+  {position: 1, nome: 'Igor Rebeche Rosa', email: 'igorrebeche@gmail.com', departamento: 'Contas a pagar', celular: 990881111},
+  {position: 2, nome: 'Roberto Amaral', email: 'Roberto Amaral@gmail.com', departamento: 'Contas a pagar', celular: 990881111},
+  {position: 3, nome: 'Patrick de Oliveira', email: 'Patrick@gmail.com', departamento: 'Contas a pagar', celular: 990881111},
+  {position: 4, nome: 'Igor Rebeche Rosa', email: 'igorrebeche@gmail.com', departamento: 'Contas a pagar', celular: 990881111},
+  {position: 5, nome: 'Igor Rebeche Rosa', email: 'igorrebeche@gmail.com', departamento: 'Contas a pagar', celular: 990881111},
+  {position: 6, nome: 'Igor Rebeche Rosa', email: 'igorrebeche@gmail.com', departamento: 'Contas a pagar', celular: 990881111},
+  {position: 7, nome: 'Igor Rebeche Rosa', email: 'igorrebeche@gmail.com', departamento: 'Contas a pagar', celular: 990881111},
+  {position: 8, nome: 'Igor Rebeche Rosa', email: 'igorrebeche@gmail.com', departamento: 'Contas a pagar', celular: 990881111},
 ];
 
 /**
@@ -30,7 +31,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class UserTableComponent implements OnInit{
  
-  displayedColumns: string[] = ['position', 'nome', 'email', 'cargo', 'actions'];
+  displayedColumns: string[] = ['position', 'nome', 'email', 'departamento', 'actions'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   ngOnInit(): void {
@@ -45,13 +46,24 @@ export class UserTableComponent implements OnInit{
 
   atualizarLista(){
     const ELEMENT_DATA2: PeriodicElement[] = [
-      {position: 1, nome: 'Teste', email: 'igorrebeche@gmail.com', cargo: 'Contas a pagar'},
-      {position: 2, nome: 'Teste', email: 'igorrebeche@gmail.com', cargo: 'Contas a pagar'},
+      {position: 1, nome: 'Teste', email: 'igorrebeche@gmail.com', departamento: 'Contas a pagar', celular: 990881111},
+      {position: 2, nome: 'Teste', email: 'igorrebeche@gmail.com', departamento: 'Contas a pagar', celular: 990881111},
     ];
     //Atualizar Informacoes
     this.dataSource = new MatTableDataSource(ELEMENT_DATA2);
     //Atualizar Paginacao
     this.dataSource.paginator = this.paginator;
+  }
+
+  // Deletar ITEM DA LISTA E ATUALIZAR NO BD
+  deletar(data){
+    // raw_data is the array of data that you getting from the db.
+    console.log(data);
+    // ATUALIZAR NO BD
+      //PEGAR ID, ACHAR USUARIO, DELETAR USUARIO
+    //DELETAR ITEM DA LISTA
+    this.dataSource.data.splice(data-1,1);
+    this.dataSource.paginator = this.paginator;  
   }
 
 }

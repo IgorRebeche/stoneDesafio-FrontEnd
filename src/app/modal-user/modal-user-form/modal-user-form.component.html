@@ -2,27 +2,27 @@
   <h2 mat-dialog-title>Informações do usuario</h2>
   <div class="row">
     <mat-form-field class="inputForm">
-      <input matInput placeholder="Nome" [formControl]="email" required>
+      <input matInput placeholder="Nome" [formControl]="nome" value="{{nomeInput}}" required>
       <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
     <mat-form-field class="inputForm">
-      <input matInput placeholder="Email" [formControl]="email" required>
+      <input matInput placeholder="Email" [formControl]="email" value="{{emailInput}}" required>
       <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
     </mat-form-field>
   </div>
   <div class="row">
       <mat-form-field class="inputForm">
-        <input matInput placeholder="Departamento" [formControl]="email" required>
+        <input matInput placeholder="Departamento" [formControl]="departamento"  value="{{departamentoInput}}"required>
         <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field class="inputForm">
-        <input matInput placeholder="Celular" [formControl]="email" required>
+        <input matInput placeholder="Celular" [formControl]="celular" value="{{celularInput}}"required>
         <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
     </div>
 </div>
 <mat-dialog-actions align="end">
-    <button mat-button color="warn">Deletar</button>
+    <button mat-button color="warn" mat-dialog-close="Deletar">Deletar</button>
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Salvar</button>
+  <button mat-button cdkFocusInitial mat-dialog-close="Salvar">Salvar</button>
 </mat-dialog-actions>
