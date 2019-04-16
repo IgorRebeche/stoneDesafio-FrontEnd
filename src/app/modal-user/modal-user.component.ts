@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject,  Input} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { ModalUserFormComponent } from './modal-user-form/modal-user-form.component';
 
@@ -16,10 +16,12 @@ export class ModalUserComponent {
 
   animal: string;
   name: string;
+  @Input() personalData : JSON;
 
   constructor(public dialog: MatDialog) {}
 
   openDialog(): void {
+    console.log(this.personalData['nome']);
     const dialogRef = this.dialog.open(ModalUserFormComponent, {
       data: {name: this.name, animal: this.animal}
     });

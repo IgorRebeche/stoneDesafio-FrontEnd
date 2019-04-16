@@ -31,7 +31,7 @@
     <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Ações </th>
         <td mat-cell *matCellDef="let element"> 
-            <app-modal-user></app-modal-user>
+            <app-modal-user [personalData]="element"></app-modal-user>
         </td>
     </ng-container> 
   
