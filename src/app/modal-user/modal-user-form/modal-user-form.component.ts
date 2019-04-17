@@ -10,13 +10,12 @@ import { ModalUserComponent, DialogData} from '../modal-user.component';
   styleUrls: ['./modal-user-form.component.css']
 })
 export class ModalUserFormComponent implements OnInit {
+  
+  nome = new FormControl('', [Validators.required]);
   email = new FormControl('', [Validators.required, Validators.email]);
-  nome = new FormControl('', Validators.required);
-
-  nomeInput :string
-  emailInput :string;
-  departamentoInput :string;
-  celularInput:string;
+  departamento = new FormControl('', [Validators.required]);
+  celular = new FormControl('', [Validators.required]);
+  matricula = new FormControl('', [Validators.required]);
 
 
   constructor(
@@ -26,29 +25,25 @@ export class ModalUserFormComponent implements OnInit {
   
 
   ngOnInit() {
-    console.log(this.data['nome'])
-    this.nomeInput = this.data['nome'];
-    this.emailInput = this.data['email'];
-    this.departamentoInput = this.data['departamento'];
-    this.celularInput = this.data['celular'];
+    this.nome.setValue(this.data['nome']);
+    this.email.setValue(this.data['email']);
+    this.departamento.setValue(this.data['departamento']);
+    this.celular.setValue(this.data['celular']);
+    this.matricula.setValue(this.data['matricula']);
   }
   
 
   getErrorMessage() {
     return this.email.hasError('required') ? 'You must enter a value' :
-        this.email.hasError('email') ? 'Not a valid email' :
+           this.email.hasError('email') ? 'Not a valid email' :
             '';
   }
-  deleteUserData(data){
-    console.log('Delete: ');
-    console.log(data);
-
-    //Deletar row
+  delUserData(){
+    this.data['acao'] = 'Deletar';
 
   }
-  updateUserData(data){
-    console.log('Update: ')
-    console.log(data);
+  updateUserData(){
+    this.data['acao'] = 'Salvar';
   }
 
 

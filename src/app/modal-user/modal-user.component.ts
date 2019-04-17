@@ -8,6 +8,7 @@ export interface DialogData {
   celular: string;
   departamento: string;
   position: string;
+  acao: string;
 }
 
 @Component({
@@ -17,38 +18,41 @@ export interface DialogData {
 })
 export class ModalUserComponent {
 
-  animal: string;
-  name: string;
   @Input() personalData : JSON;
   @Output() userFromModal = new EventEmitter();
   constructor(public dialog: MatDialog) {}
 
   openDialog(): void {
-    console.log(this.personalData);
-    const dialogRef = this.dialog.open(ModalUserFormComponent, {
+    if(this.personalData == undefined){
+      const dialogRef = this.dialog.open(ModalUserFormComponent, {
+        data: {nome: '',
+               email: '',
+               celular: '',
+               departamento: '',
+               matricula: '',
+               position: '',
+               acao: ''}
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        this.userFromModal.emit(result);
+      });
+    }else{
+      const dialogRef = this.dialog.open(ModalUserFormComponent, {
       data: {nome: this.personalData['nome'],
              email: this.personalData['email'],
              celular: this.personalData['celular'],
              departamento: this.personalData['departamento'],
-             position: this.personalData['position']}
+             matricula: this.personalData['matricula'],
+             position: this.personalData['position'],
+             acao: ''}
     });
-
     dialogRef.afterClosed().subscribe(result => {
-      //console.log(result);
-      if(result == "Deletar"){
-        this.userFromModal.emit(result);
-      }
-      if(result == "Salvar"){
-        //EMITiR OUTRO OUTPUT PARA SALVAR NO COMPONENTE DO DATA TABLE
-        console.log(result);
-      }
-
-      //console.log(result);
+      this.userFromModal.emit(result);
     });
-  }
-  updateTableEvent(data){
-    console.log('Enviou para o userTable');
+    }
    
+    
+
     
   }
 
