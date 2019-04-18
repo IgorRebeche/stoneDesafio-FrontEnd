@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource, MatPaginator} from '@angular/material';
 import { DataSource } from '@angular/cdk/table';
+import { HttpClient } from '@angular/common/http';
 
 
 export interface PeriodicElement {
@@ -36,8 +37,11 @@ export class UserTableComponent implements OnInit{
   displayedColumns: string[] = ['matricula', 'nome', 'email', 'departamento', 'actions'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
+  constructor(private http: HttpClient){}
+
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.http.get('http://localhost:3000/').subscribe((response) => {console.log(response)});
   }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -71,9 +75,16 @@ export class UserTableComponent implements OnInit{
 
     }else if(data['acao'] == 'Salvar'){
       // ATUALIZAR NO BD
+      this.http.get('http://localhost:3000/').subscribe((response) => {console.log(response)});
       console.log('enviar para bd');
       
+    }else if(data['acao']== 'Criar'){
+      //Verificar se a matricula ja existe
+      //Caso exista mostrar tela de erro
+      this.http.get('http://localhost:3000/').subscribe((response) => {console.log(response)});
+      //Caso nao registre-o
     }
+
     
     
     
