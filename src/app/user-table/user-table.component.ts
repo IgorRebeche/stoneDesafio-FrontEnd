@@ -81,7 +81,9 @@ export class UserTableComponent implements OnInit{
     }else if(data['acao']== 'Criar'){
       //Verificar se a matricula ja existe
       //Caso exista mostrar tela de erro
-      this.http.get('http://localhost:3000/').subscribe((response) => {console.log(response)});
+      this.http.get('http://localhost:3000/').subscribe(
+        (response) => {console.log(response)},
+        (error) => {console.log('err', error.message)});
       //Caso nao registre-o
     }
 
