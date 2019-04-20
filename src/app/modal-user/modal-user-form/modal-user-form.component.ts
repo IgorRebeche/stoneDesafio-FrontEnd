@@ -35,7 +35,9 @@ export class ModalUserFormComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef < ModalUserComponent > ,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+      dialogRef.disableClose = true;
+    }
 
 
 
@@ -64,7 +66,7 @@ export class ModalUserFormComponent implements OnInit {
       this.data.userData.departamento = this.departamento.value;
       this.data.userData.celular = this.celular.value;
       this.data.userData.matricula = this.matricula.value;
-    }else{
+    } else {
       this.data.userData.nome = this.nome.value;
       this.data.userData.email = this.email.value;
       this.data.userData.departamento = this.departamento.value;
@@ -73,9 +75,15 @@ export class ModalUserFormComponent implements OnInit {
       this.data['acao'] = 'Salvar';
     }
 
-    
-  }
-  createUser() {}
 
+  }
+  disableBtn() :boolean{
+    if(this.data['acao'] =='Criar'){
+      return true;
+    }else{
+      return false;
+    }
+   
+  }
 
 }

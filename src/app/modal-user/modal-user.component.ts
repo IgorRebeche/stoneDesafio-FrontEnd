@@ -31,11 +31,13 @@ export class ModalUserComponent {
 
   constructor(public dialog: MatDialog) {}
 
+  
   openDialog(): void {
 
     if (this.UserAction == 'Criar') {
       this.user = new User('', '', '', '','');
       this.acao = 'Criar';
+
     } else if (this.UserAction == 'Editar') {
       this.user = new User(this.personalData['email'], 
                            this.personalData['nome'], 
@@ -44,7 +46,7 @@ export class ModalUserComponent {
                            this.personalData['matricula'])
       this.acao = 'Editar';
     }
-
+    
     const dialogRef = this.dialog.open(ModalUserFormComponent, {
       data: {
         userData: this.user,

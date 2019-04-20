@@ -24,7 +24,7 @@
   </div>
 </div>
 <mat-dialog-actions align="end">
-    <button mat-button color="warn" (click)="delUserData()" [mat-dialog-close]="data">Deletar</button>
+    <button mat-button color="warn" (click)="delUserData()" [disabled]="disableBtn()" [mat-dialog-close]="data">Deletar</button>
   <button mat-button mat-dialog-close>Cancel</button>
   <button mat-button cdkFocusInitial (click)="updateUserData()" [mat-dialog-close]="data">Salvar</button>
 </mat-dialog-actions>
