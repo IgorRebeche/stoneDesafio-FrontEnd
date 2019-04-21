@@ -60,7 +60,7 @@ export class ModalUserFormComponent implements OnInit {
 
   }
   updateUserData() {
-    if (this.data['acao'] = 'Criar') {
+    if (this.data['acao'] == 'Criar') {
       this.data.userData.nome = this.nome.value;
       this.data.userData.email = this.email.value;
       this.data.userData.departamento = this.departamento.value;

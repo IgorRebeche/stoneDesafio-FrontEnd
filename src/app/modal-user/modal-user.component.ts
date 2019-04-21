@@ -44,7 +44,7 @@ export class ModalUserComponent {
                            this.personalData['celular'], 
                            this.personalData['departamento'], 
                            this.personalData['matricula'])
-      this.acao = 'Editar';
+      this.acao = 'Salvar';
     }
     
     const dialogRef = this.dialog.open(ModalUserFormComponent, {
