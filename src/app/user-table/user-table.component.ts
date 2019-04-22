@@ -75,8 +75,12 @@ export class UserTableComponent implements OnInit {
 
       this.http.post('http://localhost:3000/api/users/add', data.userData).subscribe(
         (response: any) => {
-          console.log('atualizar lista');
-          this.updateList();
+          if(response.status == 'exist'){
+            alert('Este usuario ja existe');
+          }else{
+            this.updateList();
+          }
+          
         },
         (error) => {
 
