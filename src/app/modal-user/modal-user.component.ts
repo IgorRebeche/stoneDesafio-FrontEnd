@@ -2,7 +2,6 @@ import {Component, Input, Output, EventEmitter} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {ModalUserFormComponent} from './modal-user-form/modal-user-form.component';
 import {User} from '../bd_models/userModel'
-import {UserTableComponent} from '../user-table/user-table.component';
 
 export interface DialogData {
     userData: User,
@@ -15,18 +14,23 @@ export interface DialogData {
   templateUrl: './modal-user.component.html',
   styleUrls: ['./modal-user.component.css']
 })
+
 export class ModalUserComponent {
 
   user: User;
   position: String;
   acao: String;
 
-  //Recebe os dados da linha
+  //Recebe os dados da linha da lista 
   @Input() personalData: User;
 
-  //Recebe o tipo de acao:
+  //Recebe o tipo de acao: =>=>
   @Input() UserAction: String;
-  @Input() nomeBotao: String;
+
+  //Recebe o nome do botao: =>=>
+  @Input() nomeBotao: String; 
+  
+  //Entrega os dados do MODAL para o user table <=<=
   @Output() userFromModal = new EventEmitter();
 
   constructor(public dialog: MatDialog) {}
@@ -50,7 +54,6 @@ export class ModalUserComponent {
     const dialogRef = this.dialog.open(ModalUserFormComponent, {
       data: {
         userData: this.user,
-        position: '1',
         acao: this.acao
       }
     });
