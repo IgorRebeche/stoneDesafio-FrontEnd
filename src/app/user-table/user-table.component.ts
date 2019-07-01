@@ -1,7 +1,6 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {MatTableDataSource, MatPaginator} from '@angular/material';
-import { DataSource } from '@angular/cdk/table';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 
 export interface userInterface {
@@ -17,18 +16,14 @@ export interface userInterface {
   templateUrl: './user-table.component.html',
   styleUrls: ['./user-table.component.css']
 })
-export class UserTableComponent implements OnInit {
+export class UserTableComponent {
 
   userDbReference: JSON;
 
-  displayedColumns: string[] = ['position', 'matricula', 'nome', 'email', 'departamento', 'actions'];
+  displayedColumns: string[] = ['matricula', 'nome', 'email', 'departamento', 'actions'];
   dataSource: any;
 
   constructor(private http: HttpClient) {}
-
-  ngOnInit(): void {
-
-  }
 
   ngAfterViewInit() {
     this.updateList();
@@ -40,25 +35,34 @@ export class UserTableComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  // ######################################################
+  // Entrega as informações dos usuarios e atualiza a lista
+  // ######################################################
+  
+
+  //##############################
   //Condicional de açoes com o BD
+  //##############################
   actionBD(data) {
     if (data['acao'] == 'Deletar') {
 
-      //PEGAR ID data['position'], ACHAR USUARIO, DELETAR USUARIO
-      console.log(data);
       //DELETAR ITEM DA LISTA
       this.http.post('https://igorr-app.herokuapp.com/api/users/remove', data.userData).subscribe(
         (data) => {
           console.log('atualizar lista');
           this.updateList();
         },
-        (error) => {}
+        (error) => {
+          console.log('Ocorreu algum erro');
+        }
       )
 
     } else if (data['acao'] == 'Salvar') {
+
       // ATUALIZAR NO BD
       this.http.post('https://igorr-app.herokuapp.com/api/users/update', data.userData).subscribe(
         (response: any) => {
+          //Alertar caso ocorra algum erro
           if(response.status == 'error'){
             alert('Algum erro ocorreu');
           }
@@ -66,7 +70,7 @@ export class UserTableComponent implements OnInit {
           this.updateList();
         },
         error => {
-          console.log('error');
+          console.log('Ocorreu algum erro');
         } 
       )
 
@@ -75,8 +79,13 @@ export class UserTableComponent implements OnInit {
 
       this.http.post('https://igorr-app.herokuapp.com/api/users/add', data.userData).subscribe(
         (response: any) => {
-          console.log('atualizar lista');
-          this.updateList();
+          //Alertar caso esta matricula ja esteja cadastrada
+          if(response.status == 'exist'){
+            alert('Este usuario ja existe');
+          }else{
+            this.updateList();
+          }
+          
         },
         (error) => {
           console.log('error', error);

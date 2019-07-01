@@ -7,7 +7,8 @@ import {
 } from '@angular/core';
 import {
   FormControl,
-  Validators
+  Validators,
+  FormGroup
 } from '@angular/forms';
 import {
   MatDialogRef,
@@ -31,6 +32,20 @@ export class ModalUserFormComponent implements OnInit {
   departamento = new FormControl('', [Validators.required]);
   celular = new FormControl('', [Validators.required]);
   matricula = new FormControl('', [Validators.required]);
+  
+  getErrorMessage() {
+    return this.email.hasError('required') ? 'Você precisa colocar um valor' :
+      this.email.hasError('email') ? 'Não é um email valido' :
+      '';
+  }
+
+  UserForm :FormGroup = new FormGroup({
+    email: this.email,
+    nome: this.nome,
+    departamento: this.departamento,
+    celular: this.celular,
+    matricula: this.matricula
+  })
 
 
   constructor(
@@ -49,12 +64,6 @@ export class ModalUserFormComponent implements OnInit {
     this.matricula.setValue(this.data.userData.matricula);
   }
 
-
-  getErrorMessage() {
-    return this.email.hasError('required') ? 'You must enter a value' :
-      this.email.hasError('email') ? 'Not a valid email' :
-      '';
-  }
   delUserData() {
     this.data['acao'] = 'Deletar';
 
@@ -66,6 +75,7 @@ export class ModalUserFormComponent implements OnInit {
       this.data.userData.departamento = this.departamento.value;
       this.data.userData.celular = this.celular.value;
       this.data.userData.matricula = this.matricula.value;
+      
     } else {
       this.data.userData.nome = this.nome.value;
       this.data.userData.email = this.email.value;
