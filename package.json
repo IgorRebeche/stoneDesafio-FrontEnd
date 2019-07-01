@@ -53,6 +53,6 @@
     "typescript": "~3.2.2"
   },
   "scripts":{
-  "postinstall": "ng build --aot -prod"
+  "heroku-postbuild": "ng build --prod"
   }
 }
