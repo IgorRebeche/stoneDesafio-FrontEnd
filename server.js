@@ -5,11 +5,11 @@ const path = require('path');
 const app = express();
 
 // Serve only the static files form the dist directory
-app.use(express.static(__dirname + '/dist/stone-desafio'));
+app.use(express.static(__dirname + '/dist/StoneDesafio'));
 
 app.get('/*', function(req,res) {
     
-res.sendFile(path.join(__dirname+'/dist/stone-desafio/index.html'));
+res.sendFile(path.join(__dirname+'/dist/StoneDesafio/index.html'));
 });
 console.log('Caminho dos arquivos estaticos: ', __dirname);
 // Start the app by listening on the default Heroku port
